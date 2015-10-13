@@ -1,0 +1,17 @@
+defaults: &defaults
+  adapter: postgresql
+  encoding: unicode
+  reconnect: false
+  pool: 5
+  min_messages: warning
+  port: 5432
+  username: rails
+  password:
+
+development:
+  database: hivemapper_development
+  <<: *defaults
+
+test: &test
+  database: hivemapper_test
+  <<: *defaults  
