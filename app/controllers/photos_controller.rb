@@ -1,5 +1,7 @@
 class PhotosController < ApplicationController
 
+  before_action :authenticate_user!
+
   def tag
     fetch_random_photo
   end

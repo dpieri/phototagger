@@ -5,6 +5,9 @@ ruby '2.2.2'
 gem 'rails', '4.2.2'
 gem 'pg'
 
+# Auth
+gem 'devise'
+
 # Assets
 gem 'less-rails'
 gem 'coffee-rails', '~> 4.0.0'
