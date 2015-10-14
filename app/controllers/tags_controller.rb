@@ -3,9 +3,6 @@ class TagsController < ApplicationController
 
   def create
     @tag = current_user.tags.build(tag_params)
-    puts "TAG"
-    puts @tag
-    puts @tag.class
     photo = Photo.first_or_create!(flickr_id: params[:flickr_id])
     @tag.photo = photo
 

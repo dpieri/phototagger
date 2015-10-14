@@ -19,7 +19,6 @@ var TypeAhead = React.createClass({
       items: 5,
       autoSelect: false,
       afterSelect: function(item) {
-        console.log('after select');
         self.props.onSubmit(item);
       }
     })
