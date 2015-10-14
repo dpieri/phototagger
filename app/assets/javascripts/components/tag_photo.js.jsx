@@ -1,12 +1,12 @@
 var TagPhoto = React.createClass({
   propTypes: {
-    id: React.PropTypes.string
+    url: React.PropTypes.string
   },
 
   render: function() {
     return (
       <div>
-        <div>Id: {this.props.id}</div>
+        <img src={this.props.url} />
       </div>
     );
   }
