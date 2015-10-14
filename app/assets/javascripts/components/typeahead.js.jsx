@@ -1,6 +1,9 @@
 var TypeAhead = React.createClass({
   propTypes: {
-    url: React.PropTypes.string
+    x1: React.PropTypes.number,
+    y1: React.PropTypes.number,
+    x2: React.PropTypes.number,
+    y2: React.PropTypes.number,
   },
 
   componentDidMount: function() {
@@ -21,8 +24,12 @@ var TypeAhead = React.createClass({
   },
 
   render: function() {
+    var containerStyle = {
+      top: this.props.y2 + "px",
+      left: this.props.x1 + "px"
+    }
     return (
-      <div>
+      <div style={containerStyle} className="typeahead-holder" >
         <input ref="typeahead" type="text" data-provide="typeahead" autoComplete="off" />
       </div>
     );
