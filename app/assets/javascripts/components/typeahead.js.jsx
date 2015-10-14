@@ -4,6 +4,11 @@ var TypeAhead = React.createClass({
     y1: React.PropTypes.number,
     x2: React.PropTypes.number,
     y2: React.PropTypes.number,
+    inputVal: React.PropTypes.string,
+  },
+
+  getInitialState: function() {
+    return {inputVal: null};
   },
 
   componentDidMount: function() {
@@ -23,6 +28,10 @@ var TypeAhead = React.createClass({
     })
   },
 
+  onChange: function() {
+    console.log('onChange');
+  },
+
   render: function() {
     var containerStyle = {
       top: this.props.y2 + "px",
@@ -30,7 +39,13 @@ var TypeAhead = React.createClass({
     }
     return (
       <div style={containerStyle} className="typeahead-holder" >
-        <input ref="typeahead" type="text" data-provide="typeahead" autoComplete="off" />
+        <input ref="typeahead"
+            type="text"
+            data-provide="typeahead"
+            autoComplete="off"
+            value={this.state.inputVal}
+            onChange={this.onChange}
+          />
       </div>
     );
   }
