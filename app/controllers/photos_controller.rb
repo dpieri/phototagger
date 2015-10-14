@@ -1,5 +1,4 @@
 class PhotosController < ApplicationController
-
   before_action :authenticate_user!
 
   def tag
@@ -17,6 +16,7 @@ class PhotosController < ApplicationController
     # Also for some reason, photo.to_json returns a JSON string
     photo_json = JSON.parse(photo.to_json)
 
+    @flickr_id = photo.id
     @photo_url = "https://farm#{photo_json["farm"]}.staticflickr.com/#{photo_json["server"]}/#{photo_json["id"]}_#{photo_json["secret"]}_c.jpg"
   end
 

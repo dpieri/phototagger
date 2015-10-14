@@ -5,6 +5,7 @@ var TypeAhead = React.createClass({
     x2: React.PropTypes.number,
     y2: React.PropTypes.number,
     inputVal: React.PropTypes.string,
+    onSubmit: React.PropTypes.func,
   },
 
   getInitialState: function() {
@@ -12,18 +13,14 @@ var TypeAhead = React.createClass({
   },
 
   componentDidMount: function() {
+    var self = this;
     $(React.findDOMNode(this.refs.typeahead)).typeahead({
       source: commonWords,
       items: 5,
       autoSelect: false,
-      updater: function(item) {
-        console.log('updated');
-        // I think this is where we submit the item
-        return item;
-      },
       afterSelect: function(item) {
         console.log('after select');
-        return item;
+        self.props.onSubmit(item);
       }
     })
   },

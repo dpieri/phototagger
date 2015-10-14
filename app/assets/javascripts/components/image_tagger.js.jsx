@@ -1,6 +1,7 @@
 var ImageTagger = React.createClass({
   propTypes: {
-    url: React.PropTypes.string
+    url: React.PropTypes.string,
+    onTag: React.PropTypes.func,
   },
 
   getInitialState: function() {
@@ -27,6 +28,16 @@ var ImageTagger = React.createClass({
     });
   },
 
+  onTypeaheadSubmit: function(tag) {
+    var cords = {
+      x1: this.state.x1,
+      y1: this.state.y1,
+      x2: this.state.x2,
+      y2: this.state.y2,
+    };
+    this.props.onTag(tag, cords);
+  },
+
   render: function() {
 
     var typeaheadMarkup;
@@ -37,6 +48,7 @@ var ImageTagger = React.createClass({
           y1={this.state.y1}
           x2={this.state.x2}
           y2={this.state.y2}
+          onSubmit={this.onTypeaheadSubmit}
         />
       );
     }
