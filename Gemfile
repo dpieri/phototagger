@@ -6,10 +6,10 @@ gem 'rails', '4.2.2'
 gem 'pg'
 
 # Assets
-# gem 'less-rails'
+gem 'less-rails'
 gem 'coffee-rails', '~> 4.0.0'
-# gem 'therubyracer'
-# gem 'libv8', '>= 3.16.14.7' # OSX 10.10 compatibility
+gem 'therubyracer'
+gem 'libv8', '3.16.14.3' # OSX 10.10 compatibility
 
 # React
 gem 'react-rails', '~> 1.3.0'
