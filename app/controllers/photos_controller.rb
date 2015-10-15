@@ -3,6 +3,7 @@ class PhotosController < ApplicationController
 
   def tag
     fetch_random_photo
+    get_tagged_photos
   end
 
   private
@@ -18,6 +19,10 @@ class PhotosController < ApplicationController
 
     @flickr_id = photo.id
     @photo_url = "https://farm#{photo_json["farm"]}.staticflickr.com/#{photo_json["server"]}/#{photo_json["id"]}_#{photo_json["secret"]}_c.jpg"
+  end
+
+  def get_tagged_photos
+    @user_tags = current_user.tags.as_json
   end
 
 end

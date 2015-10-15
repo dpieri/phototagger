@@ -2,6 +2,7 @@ var TagPhoto = React.createClass({
   propTypes: {
     url: React.PropTypes.string,
     flickrId: React.PropTypes.string,
+    userTags: React.PropTypes.array,
   },
 
   getInitialState: function() {
@@ -60,10 +61,13 @@ var TagPhoto = React.createClass({
     }
 
     return (
-      <div className="container">
-        {errorMarkup}
-        {nextButtonMarkup}
-        <ImageTagger url={this.props.url} onTag={this.onTag} />
+      <div className="container-fluid">
+        <Sidebar userTags={this.props.userTags}/>
+        <div className="col-sm-9">
+          {errorMarkup}
+          {nextButtonMarkup}
+          <ImageTagger url={this.props.url} onTag={this.onTag} />
+        </div>
       </div>
     );
   }

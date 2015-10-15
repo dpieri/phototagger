@@ -14,6 +14,9 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'therubyracer'
 gem 'libv8', '3.16.14.3' # OSX 10.10 compatibility
 
+# JS tools
+gem 'underscore-rails'
+
 # React
 gem 'react-rails', '~> 1.3.0'
 
