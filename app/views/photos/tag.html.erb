@@ -1,1 +1,9 @@
-<%= react_component('TagPhoto', flickrId: @flickr_id, url: @photo_url, userTags: @user_tags) %>
+<%= react_component(
+    'TagPhoto',
+    flickrId: @flickr_id,
+    url: @photo_url,
+    userTags: @user_tags,
+    farm: @farm,
+    server: @server,
+    secret: @secret,
+  ) %>

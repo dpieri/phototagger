@@ -3,6 +3,9 @@ var TagPhoto = React.createClass({
     url: React.PropTypes.string,
     flickrId: React.PropTypes.string,
     userTags: React.PropTypes.array,
+    farm: React.PropTypes.string,
+    server: React.PropTypes.string,
+    secret: React.PropTypes.string,
   },
 
   getInitialState: function() {
@@ -13,7 +16,12 @@ var TagPhoto = React.createClass({
     $.ajax('/tags', {
       method: 'POST',
       data: {
-        flickr_id: this.props.flickrId,
+        photo: {
+          flickr_id: this.props.flickrId,
+          farm: this.props.farm,
+          server: this.props.server,
+          secret: this.props.secret,
+        },
         tag: {
           tag: tag,
           x1: cords.x1,

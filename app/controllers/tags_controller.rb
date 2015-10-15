@@ -2,25 +2,26 @@ class TagsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    @tag = current_user.tags.build(tag: params[:tag][:tag])
-    @tag.assign_attributes(coordinate_params)
+    tag = current_user.tags.build(tag: params[:tag][:tag])
+    tag.assign_attributes(coordinate_params)
     photo = Photo.first_or_create!(flickr_id: params[:flickr_id])
-    @tag.photo = photo
+    photo.update!(photo_params)
+    tag.photo = photo
 
-    puts @tag.as_json
+    puts tag.as_json
 
     respond_to do |format|
-      if @tag.save
-        format.json { render json: @tag, status: :created }
+      if tag.save
+        format.json { render json: tag, status: :created }
       else
-        format.json { render json: @tag.errors, status: :unprocessable_entity }
+        format.json { render json: tag.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def show
-    @tag = Tag.find(params[:id])
-    photo = flickr_photo_from_id(@tag.photo.flickr_id) # This is in ApplicationController
+    tag = Tag.find(params[:id])
+    photo = flickr_photo_from_id(tag.photo.flickr_id) # This is in ApplicationController
     url_from_flickr_photo(photo)
     get_tagged_photos
   end
@@ -40,6 +41,10 @@ class TagsController < ApplicationController
       x2: params[:tag][:x2].to_f / width,
       y2: params[:tag][:y2].to_f / height
     }
+  end
+
+  def photo_params
+    params.require(:photo).permit(:flickr_id, :farm, :server, :secret)
   end
 
 end
