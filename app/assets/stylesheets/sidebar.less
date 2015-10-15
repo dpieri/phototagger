@@ -14,6 +14,22 @@
   padding-bottom  : @padding-base-vertical;
 
   .nav-sidebar {
-    margin-bottom   : @padding-large-vertical;
+    margin  : 0 -(@grid-gutter-width/2) (2 * @padding-large-vertical) -(@grid-gutter-width/2);
+
+    li.active {
+      a {
+        background-color    : @link-color;
+        color               : white;
+      }
+    }
+
+    li.divider {
+      font-size   : 0.9em;
+      padding     : @nav-link-padding;
+    }
+
+    &.tagged-photos {
+      border-top    : 1px solid @gray-lighter;
+    }
   }
 }

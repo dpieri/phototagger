@@ -6,6 +6,7 @@ var TagPhoto = React.createClass({
     farm: React.PropTypes.string,
     server: React.PropTypes.string,
     secret: React.PropTypes.string,
+    currentRoute: React.PropTypes.string,
   },
 
   getInitialState: function() {
@@ -72,11 +73,10 @@ var TagPhoto = React.createClass({
         <span>Image Taggr</span>
       );
     }
-
     return (
       <div className="container-fluid">
         <div className="row">
-          <Sidebar userTags={this.props.userTags}/>
+          <Sidebar userTags={this.props.userTags} currentRoute={this.props.currentRoute}/>
           <div className="col-sm-9 col-sm-offset-3 tagger-holder">
             {errorMarkup}
             <div className="above-image">

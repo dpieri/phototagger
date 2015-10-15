@@ -1,1 +1,6 @@
-<%= react_component('ShowPhoto', url: @photo_url, userTags: @user_tags) %>
+<%= react_component(
+    'ShowPhoto',
+    url: @photo_url,
+    userTags: @user_tags,
+    currentRoute: request.path
+  ) %>
