@@ -28,6 +28,6 @@ class ApplicationController < ActionController::Base
   end
 
   def get_tagged_photos
-    @user_tags = current_user.tags.as_json
+    @user_tags = current_user.tags.order(created_at: :desc).as_json
   end
 end

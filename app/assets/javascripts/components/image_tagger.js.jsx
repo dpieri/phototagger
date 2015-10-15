@@ -36,7 +36,6 @@ var ImageTagger = React.createClass({
   },
 
   render: function() {
-
     var typeaheadMarkup;
     if (this.state.x2) {
       typeaheadMarkup = (
@@ -45,6 +44,7 @@ var ImageTagger = React.createClass({
           y1={this.state.y1}
           x2={this.state.x2}
           y2={this.state.y2}
+          imageRef={this.refs.image}
           onSubmit={this.onTypeaheadSubmit}
         />
       );
