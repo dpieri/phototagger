@@ -23,18 +23,15 @@ var ImageTagger = React.createClass({
           y1: cords.y1,
           x2: cords.x2,
           y2: cords.y2,
+          imageWidth: self.refs.image.getDOMNode().width,
+          imageHeight: self.refs.image.getDOMNode().height,
         });
       }
     });
   },
 
   onTypeaheadSubmit: function(tag) {
-    var cords = {
-      x1: this.state.x1,
-      y1: this.state.y1,
-      x2: this.state.x2,
-      y2: this.state.y2,
-    };
+    var cords = this.state;
     this.props.onTag(tag, cords);
   },
 

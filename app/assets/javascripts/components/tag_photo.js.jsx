@@ -20,6 +20,8 @@ var TagPhoto = React.createClass({
           y1: cords.y1,
           x2: cords.x2,
           y2: cords.y2,
+          image_width: cords.imageWidth,
+          image_height: cords.imageHeight,
         }
       }
     }).done(this.onSuccess).fail(this.onFailure);
