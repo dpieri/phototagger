@@ -8,10 +8,4 @@ class PhotosController < ApplicationController
     get_tagged_photos
   end
 
-  private
-
-  def get_tagged_photos
-    @user_tags = current_user.tags.as_json
-  end
-
 end
