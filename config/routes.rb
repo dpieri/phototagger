@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   post 'photos/:id/tag' => 'photos#save_tag'
 
-  resources :tags, only: [:create]
+  resources :tags, only: [:show, :create]
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

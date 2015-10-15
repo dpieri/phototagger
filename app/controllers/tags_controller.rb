@@ -15,6 +15,12 @@ class TagsController < ApplicationController
     end
   end
 
+  def show
+    @tag = Tag.find(params[:id])
+    photo = flickr_photo_from_id(@tag.photo.flickr_id) # This is in ApplicationController
+    url_from_flickr_photo(photo)
+  end
+
   private
 
   def tag_params
