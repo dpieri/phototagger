@@ -53,22 +53,29 @@ var TagPhoto = React.createClass({
       );
     }
 
-    var nextButtonMarkup = null;
     if (this.state.savedTag) {
-      nextButtonMarkup = (
-        <a className="btn btn-block btn-success" onClick={this.refresh}>
+      aboveImageMarkup = (
+        <a className="btn btn-success" onClick={this.refresh}>
           Saved! Tag another.
         </a>
+      );
+    } else {
+      aboveImageMarkup = (
+        <span>Image Taggr</span>
       );
     }
 
     return (
       <div className="container-fluid">
-        <Sidebar userTags={this.props.userTags}/>
-        <div className="col-sm-9">
-          {errorMarkup}
-          {nextButtonMarkup}
-          <ImageTagger url={this.props.url} onTag={this.onTag} />
+        <div className="row">
+          <Sidebar userTags={this.props.userTags}/>
+          <div className="col-sm-9 col-sm-offset-3 tagger-holder">
+            {errorMarkup}
+            <div className="above-image">
+              {aboveImageMarkup}
+            </div>
+            <ImageTagger url={this.props.url} onTag={this.onTag} />
+          </div>
         </div>
       </div>
     );

@@ -52,7 +52,7 @@ var ImageTagger = React.createClass({
 
     return (
       <div className="image-holder">
-        <img ref="image" src={this.props.url} />
+        <img ref="image" className="img-responsive" src={this.props.url} />
         {typeaheadMarkup}
       </div>
     );
