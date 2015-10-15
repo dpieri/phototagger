@@ -1,8 +1,25 @@
+@import "bootstrap/mixins";
+
 .typeahead-holder {
   position  : absolute;
   z-index   : 3;
+  display   : block;
+  max-width : none;
+
+  .popover-content {
+    padding     : 0;
+    input {
+      border    : none;
+      .box-shadow(none);
+    }
+  }
 
   input {
     width     : 100%;
+  }
+
+  .typeahead {
+    right   : -1px;
+    left    : -1px;
   }
 }

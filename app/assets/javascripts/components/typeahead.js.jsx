@@ -40,17 +40,20 @@ var TypeAhead = React.createClass({
       right: this.containerRight() + "px"
     }
     return (
-      <div style={containerStyle} className="typeahead-holder" >
-        <input ref="typeahead"
-            className="form-control"
-            type="text"
-            data-provide="typeahead"
-            autoComplete="off"
-            placeholder="Tag this section"
-            value={this.state.inputVal}
-            onChange={this.onChange}
-            autoFocus={true}
-          />
+      <div className="popover bottom typeahead-holder" role="tooltip" style={containerStyle}>
+        <div className="arrow"></div>
+        <div className="popover-content">
+          <input ref="typeahead"
+              className="form-control input-lg"
+              type="text"
+              data-provide="typeahead"
+              autoComplete="off"
+              placeholder="Tag this section"
+              value={this.state.inputVal}
+              onChange={this.onChange}
+              autoFocus={true}
+            />
+        </div>
       </div>
     );
   }
