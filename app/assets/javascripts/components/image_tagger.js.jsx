@@ -62,7 +62,9 @@ var ImageTagger = React.createClass({
     var loadingMarkup;
     if (this.props.loading) {
       loadingMarkup = (
-        <div className="loading-message">Loading...</div>
+        <div className="loading-message">
+          <i className="fa fa-spinner fa-spin"></i>
+        </div>
       );
     }
 

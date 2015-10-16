@@ -8,8 +8,6 @@ class TagsController < ApplicationController
     photo.update!(photo_params)
     tag.photo = photo
 
-    puts tag.as_json
-
     respond_to do |format|
       if tag.save
         get_tagged_photos

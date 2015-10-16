@@ -13,6 +13,7 @@ gem 'less-rails'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'therubyracer'
 gem 'libv8', '3.16.14.3' # OSX 10.10 compatibility
+gem 'font-awesome-rails'
 
 # JS tools
 gem 'underscore-rails'
