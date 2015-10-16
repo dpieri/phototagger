@@ -10,10 +10,14 @@ var TagPhoto = React.createClass({
   },
 
   getInitialState: function() {
-    return {errorMessage: null};
+    return {
+      errorMessage: null,
+      loading: false,
+    };
   },
 
   submitTag: function(tag, cords) {
+    this.setState({loading: true});
     $.ajax('/tags', {
       method: 'POST',
       data: {
@@ -41,17 +45,20 @@ var TagPhoto = React.createClass({
       userTags: data
     });
     this.setState({
-      savedTag: true
+      savedTag: true,
+      loading: false,
     });
   },
 
   onFailure: function( jqXHR, textStatus, errorThrown) {
     this.setState({
-      errorMessage: errorThrown
+      errorMessage: errorThrown,
+      loading: false,
     });
   },
 
   fetchNewPhoto: function() {
+    this.setState({loading: true});
     $.ajax( '/' ).done(this.onFetchNewPhoto).fail(this.onFailure);
   },
 
@@ -59,6 +66,7 @@ var TagPhoto = React.createClass({
     this.setProps(data);
     this.setState({
       savedTag: false,
+      loading: false,
     });
   },
 
@@ -92,7 +100,7 @@ var TagPhoto = React.createClass({
             <div className="above-image">
               {aboveImageMarkup}
             </div>
-            <ImageTagger url={this.props.url} onTag={this.submitTag} />
+            <ImageTagger url={this.props.url} onTag={this.submitTag} loading={this.state.loading} />
           </div>
         </div>
       </div>

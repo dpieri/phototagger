@@ -2,6 +2,7 @@ var ImageTagger = React.createClass({
   propTypes: {
     url: React.PropTypes.string,
     onTag: React.PropTypes.func,
+    loading: React.PropTypes.bool,
   },
 
   getInitialState: function() {
@@ -58,10 +59,20 @@ var ImageTagger = React.createClass({
       );
     }
 
+    var loadingMarkup;
+    if (this.props.loading) {
+      loadingMarkup = (
+        <div className="loading-message">Loading...</div>
+      );
+    }
+
+    var holderClass = "image-holder" + (this.props.loading ? ' loading' : '');
+
     return (
-      <div className="image-holder">
+      <div className={holderClass}>
         <img ref="image" className="img-responsive" src={this.props.url} />
         {typeaheadMarkup}
+        {loadingMarkup}
       </div>
     );
   }

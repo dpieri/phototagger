@@ -16,7 +16,17 @@
   position    : relative;
   display     : inline-block;
 
-  img {
+  &.loading {
+    img {
+      opacity     : 0.5;
+    }
+  }
+
+  .loading-message {
+    position  : absolute;
+    top       : 30px;
+    width     : 100%;
+    
   }
 }
 
