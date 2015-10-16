@@ -21,11 +21,7 @@ var TypeAhead = React.createClass({
       afterSelect: function(item) {
         self.props.onSubmit(item);
       }
-    })
-  },
-
-  onChange: function() {
-    console.log('onChange');
+    }).focus();
   },
 
   containerRight: function() {
@@ -50,8 +46,6 @@ var TypeAhead = React.createClass({
               autoComplete="off"
               placeholder="Tag this section"
               value={this.state.inputVal}
-              onChange={this.onChange}
-              autoFocus={true}
             />
         </div>
       </div>
