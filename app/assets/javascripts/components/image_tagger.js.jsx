@@ -14,6 +14,14 @@ var ImageTagger = React.createClass({
   },
 
   componentDidMount: function() {
+    this.attachImageAreaSelect();
+  },
+
+  componentWillReceiveProps: function() {
+    this.attachImageAreaSelect();
+  },
+
+  attachImageAreaSelect: function() {
     var self = this;
     $(React.findDOMNode(this.refs.image)).imgAreaSelect({
       handles: true,

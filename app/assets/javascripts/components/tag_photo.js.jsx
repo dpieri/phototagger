@@ -13,7 +13,7 @@ var TagPhoto = React.createClass({
     return {errorMessage: null};
   },
 
-  onTag: function(tag, cords) {
+  submitTag: function(tag, cords) {
     $.ajax('/tags', {
       method: 'POST',
       data: {
@@ -33,10 +33,10 @@ var TagPhoto = React.createClass({
           image_height: cords.imageHeight,
         }
       }
-    }).done(this.onSuccess).fail(this.onFailure);
+    }).done(this.onSubmitTag).fail(this.onFailure);
   },
 
-  onSuccess: function(data, textStatus, jqXHR) {
+  onSubmitTag: function(data, textStatus, jqXHR) {
     this.setProps({
       userTags: data
     });
@@ -51,8 +51,15 @@ var TagPhoto = React.createClass({
     });
   },
 
-  refresh: function() {
-    window.location.reload();
+  fetchNewPhoto: function() {
+    $.ajax( '/' ).done(this.onFetchNewPhoto).fail(this.onFailure);
+  },
+
+  onFetchNewPhoto: function(data, textStatus, jqXHR) {
+    this.setProps(data);
+    this.setState({
+      savedTag: false,
+    });
   },
 
   render: function() {
@@ -67,7 +74,7 @@ var TagPhoto = React.createClass({
 
     if (this.state.savedTag) {
       aboveImageMarkup = (
-        <a className="btn btn-success" onClick={this.refresh}>
+        <a className="btn btn-success" onClick={this.fetchNewPhoto}>
           Saved! Tag another.
         </a>
       );
@@ -85,7 +92,7 @@ var TagPhoto = React.createClass({
             <div className="above-image">
               {aboveImageMarkup}
             </div>
-            <ImageTagger url={this.props.url} onTag={this.onTag} />
+            <ImageTagger url={this.props.url} onTag={this.submitTag} />
           </div>
         </div>
       </div>

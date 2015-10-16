@@ -9,6 +9,23 @@ class PhotosController < ApplicationController
     @server = photo["server"]
     @secret = photo["secret"]
     get_tagged_photos
+
+    respond_to do |format|
+      format.json { render json: vars_as_json, status: :created }
+      format.html { render :tag}
+    end
+  end
+
+  private
+
+  def vars_as_json
+    {
+      flickrId: @flickr_id,
+      url: @photo_url,
+      farm: @farm,
+      server: @server,
+      secret: @secret
+    }
   end
 
 end
