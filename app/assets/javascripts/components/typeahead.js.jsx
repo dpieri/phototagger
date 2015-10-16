@@ -4,7 +4,6 @@ var TypeAhead = React.createClass({
     y1: React.PropTypes.number,
     x2: React.PropTypes.number,
     y2: React.PropTypes.number,
-    inputVal: React.PropTypes.string,
     onSubmit: React.PropTypes.func,
   },
 
@@ -26,7 +25,14 @@ var TypeAhead = React.createClass({
 
   containerRight: function() {
     var diff = this.props.x2 - this.props.x1;
-    return this.props.imageRef.getDOMNode().width - Math.max(diff, 200) - this.props.x1
+    return this.props.imageRef.getDOMNode().width - Math.max(diff, 250) - this.props.x1
+  },
+
+  onChange: function() {
+    var inputVal = this.refs.typeahead.getDOMNode().value;
+    this.setState({
+      inputVal: inputVal
+    })
   },
 
   render: function() {
@@ -34,7 +40,12 @@ var TypeAhead = React.createClass({
       top: this.props.y2 + "px",
       left: this.props.x1 + "px",
       right: this.containerRight() + "px"
-    }
+    };
+
+    var hintStyle = {
+      display : this.state.inputVal ? 'block' : 'none',
+    };
+
     return (
       <div className="popover bottom typeahead-holder" role="tooltip" style={containerStyle}>
         <div className="arrow"></div>
@@ -46,7 +57,10 @@ var TypeAhead = React.createClass({
               autoComplete="off"
               placeholder="Tag this section"
               value={this.state.inputVal}
+              onChange={this.onChange}
+              value={this.state.inputVal}
             />
+          <span className="hint" style={hintStyle}>Enter to submit</span>
         </div>
       </div>
     );
