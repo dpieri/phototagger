@@ -12,7 +12,8 @@ class TagsController < ApplicationController
 
     respond_to do |format|
       if tag.save
-        format.json { render json: tag, status: :created }
+        get_tagged_photos
+        format.json { render json: @user_tags, status: :created }
       else
         format.json { render json: tag.errors, status: :unprocessable_entity }
       end

@@ -37,6 +37,9 @@ var TagPhoto = React.createClass({
   },
 
   onSuccess: function(data, textStatus, jqXHR) {
+    this.setProps({
+      userTags: data
+    });
     this.setState({
       savedTag: true
     });
