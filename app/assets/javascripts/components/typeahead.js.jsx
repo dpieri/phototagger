@@ -35,6 +35,12 @@ var TypeAhead = React.createClass({
     })
   },
 
+  onKeyPress: function(e) {
+    if (e.nativeEvent.keyCode === 13) { // Enter
+      this.props.onSubmit(this.state.inputVal);
+    }
+  },
+
   render: function() {
     var containerStyle = {
       top: this.props.y2 + "px",
@@ -58,6 +64,7 @@ var TypeAhead = React.createClass({
               placeholder="Tag this section"
               value={this.state.inputVal}
               onChange={this.onChange}
+              onKeyPress={this.onKeyPress}
               value={this.state.inputVal}
             />
           <span className="hint" style={hintStyle}>Enter to submit</span>
