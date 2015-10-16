@@ -5,6 +5,9 @@ ruby '2.2.2'
 gem 'rails', '4.2.2'
 gem 'pg'
 
+# Web server
+gem 'puma'
+
 # Auth
 gem 'devise'
 
@@ -34,9 +37,6 @@ gem 'jquery-rails'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.0'
-
-# Use Unicorn as the app server
-# gem 'unicorn'
 
 
 group :development, :test do
