@@ -4,8 +4,7 @@ class TagsController < ApplicationController
   def create
     tag = current_user.tags.build(tag: params[:tag][:tag])
     tag.assign_attributes(coordinate_params)
-    photo = Photo.first_or_create!(flickr_id: params[:flickr_id])
-    photo.update!(photo_params)
+    photo = Photo.find_or_create_by!(photo_params)
     tag.photo = photo
 
     respond_to do |format|

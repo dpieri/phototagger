@@ -2,13 +2,18 @@ var Sidebar = React.createClass({
 
   render: function() {
     var self = this;
+    window.testMe = this.props.userTags;
     if (this.props.userTags.length > 0) {
       var tagsMarkup = _.map(this.props.userTags, function(tag, index){
-        var href = '/tags/' + tag.id
-        var activeClass = self.props.currentRoute === href ? 'active' : ''
+        var href = '/tags/' + tag.id;
+        var activeClass = self.props.currentRoute === href ? 'active' : '';
+        var imageUrl = 'https://farm' + tag.photo.farm + '.staticflickr.com/' + tag.photo.server + '/' + tag.photo.flickr_id + '_' + tag.photo.secret + '_s.jpg';
         return (
           <li key={index} className={activeClass}>
-            <a href={href} >{tag.tag}</a>
+            <a href={href} >
+              <img src={imageUrl} width="50" height="50" />
+              {tag.tag}
+            </a>
           </li>
         );
       });

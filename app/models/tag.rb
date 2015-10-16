@@ -4,4 +4,9 @@ class Tag < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :photo
+
+  # for json rendering
+  def as_json(options={})
+    super().merge(:photo => photo.as_json)
+  end
 end
