@@ -96,17 +96,33 @@ var TagPhoto = React.createClass({
       );
     }
 
+    var aboveImageMarkup;
+    var imageMarkup;
     if (this.state.savedTag) {
       aboveImageMarkup = (
         <a className="btn btn-success" onClick={this.fetchNewPhoto}>
           Saved! Tag another.
         </a>
       );
+
+      imageMarkup = (
+        <ImageShower url={this.props.url} tag={this.props.userTags[0]} />
+      );
     } else {
-      aboveImageMarkup = (
-        <span>Image Taggr</span>
+      imageMarkup = (
+        <ImageTagger
+            url={this.props.url}
+            onTag={this.submitTag}
+            onImageAreaSelected={this.onImageAreaSelected}
+            loading={this.state.loading}
+            x1={this.props.x1}
+            y1={this.props.y1}
+            x2={this.props.x2}
+            y2={this.props.y2}
+          />
       );
     }
+
     return (
       <div className="container-fluid">
         <div className="row">
@@ -116,16 +132,7 @@ var TagPhoto = React.createClass({
             <div className="above-image">
               {aboveImageMarkup}
             </div>
-            <ImageTagger
-                url={this.props.url}
-                onTag={this.submitTag}
-                onImageAreaSelected={this.onImageAreaSelected}
-                loading={this.state.loading}
-                x1={this.props.x1}
-                y1={this.props.y1}
-                x2={this.props.x2}
-                y2={this.props.y2}
-              />
+            {imageMarkup}
           </div>
         </div>
       </div>
