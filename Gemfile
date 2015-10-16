@@ -6,7 +6,7 @@ gem 'rails', '4.2.2'
 gem 'pg'
 
 # Web server
-gem 'puma'
+gem 'unicorn'
 
 # Auth
 gem 'devise'
