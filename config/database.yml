@@ -9,9 +9,9 @@ defaults: &defaults
   password:
 
 development:
-  database: hivemapper_development
+  database: imagetagger_development
   <<: *defaults
 
 test: &test
-  database: hivemapper_test
-  <<: *defaults  
+  database: imagetagger_test
+  <<: *defaults
