@@ -3,23 +3,24 @@ var ImageTagger = React.createClass({
     url: React.PropTypes.string,
     onTag: React.PropTypes.func,
     loading: React.PropTypes.bool,
-  },
-
-  getInitialState: function() {
-    return {
-      x1: null,
-      y1: null,
-      x2: null,
-      y2: null,
-    };
+    x1: React.PropTypes.string,
+    y1: React.PropTypes.string,
+    x2: React.PropTypes.string,
+    y2: React.PropTypes.string,
+    onImageAreaSelected: React.PropTypes.func,
   },
 
   componentDidMount: function() {
     this.attachImageAreaSelect();
   },
 
-  componentWillReceiveProps: function() {
-    this.attachImageAreaSelect();
+  componentDidUpdate: function() {
+    if (!this.props.x2) {
+      // If we no longer have an x2 prop, that means we have submitted the tag
+      // In that case we want to get rid of the image area plugin and init a new one
+      $(React.findDOMNode(this.refs.image)).imgAreaSelect({remove: true});
+      this.attachImageAreaSelect();
+    }
   },
 
   attachImageAreaSelect: function() {
@@ -27,7 +28,7 @@ var ImageTagger = React.createClass({
     $(React.findDOMNode(this.refs.image)).imgAreaSelect({
       handles: true,
       onSelectEnd: function(image, cords) {
-        self.setState({
+        self.props.onImageAreaSelected({
           x1: cords.x1,
           y1: cords.y1,
           x2: cords.x2,
@@ -40,19 +41,18 @@ var ImageTagger = React.createClass({
   },
 
   onTypeaheadSubmit: function(tag) {
-    var cords = this.state;
-    this.props.onTag(tag, cords);
+    this.props.onTag(tag);
   },
 
   render: function() {
     var typeaheadMarkup;
-    if (this.state.x2) {
+    if (this.props.x2) {
       typeaheadMarkup = (
         <TypeAhead
-          x1={this.state.x1}
-          y1={this.state.y1}
-          x2={this.state.x2}
-          y2={this.state.y2}
+          x1={this.props.x1}
+          y1={this.props.y1}
+          x2={this.props.x2}
+          y2={this.props.y2}
           imageRef={this.refs.image}
           onSubmit={this.onTypeaheadSubmit}
         />

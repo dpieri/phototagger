@@ -7,6 +7,12 @@ var TagPhoto = React.createClass({
     server: React.PropTypes.string,
     secret: React.PropTypes.string,
     currentRoute: React.PropTypes.string,
+    x1: React.PropTypes.string,
+    y1: React.PropTypes.string,
+    x2: React.PropTypes.string,
+    y2: React.PropTypes.string,
+    imageWidth: React.PropTypes.number,
+    imageHeight: React.PropTypes.number,
   },
 
   getInitialState: function() {
@@ -16,7 +22,7 @@ var TagPhoto = React.createClass({
     };
   },
 
-  submitTag: function(tag, cords) {
+  submitTag: function(tag) {
     this.setState({loading: true});
     $.ajax('/tags', {
       method: 'POST',
@@ -29,12 +35,12 @@ var TagPhoto = React.createClass({
         },
         tag: {
           tag: tag,
-          x1: cords.x1,
-          y1: cords.y1,
-          x2: cords.x2,
-          y2: cords.y2,
-          image_width: cords.imageWidth,
-          image_height: cords.imageHeight,
+          x1: this.props.x1,
+          y1: this.props.y1,
+          x2: this.props.x2,
+          y2: this.props.y2,
+          image_width: this.props.imageWidth,
+          image_height: this.props.imageHeight,
         }
       }
     }).done(this.onSubmitTag).fail(this.onFailure);
@@ -42,7 +48,13 @@ var TagPhoto = React.createClass({
 
   onSubmitTag: function(data, textStatus, jqXHR) {
     this.setProps({
-      userTags: data
+      userTags: data,
+      x1: null,
+      y1: null,
+      x2: null,
+      y2: null,
+      image_width: null,
+      image_height: null,
     });
     this.setState({
       savedTag: true,
@@ -68,6 +80,10 @@ var TagPhoto = React.createClass({
       savedTag: false,
       loading: false,
     });
+  },
+
+  onImageAreaSelected: function(data) {
+    this.setProps(data);
   },
 
   render: function() {
@@ -100,7 +116,16 @@ var TagPhoto = React.createClass({
             <div className="above-image">
               {aboveImageMarkup}
             </div>
-            <ImageTagger url={this.props.url} onTag={this.submitTag} loading={this.state.loading} />
+            <ImageTagger
+                url={this.props.url}
+                onTag={this.submitTag}
+                onImageAreaSelected={this.onImageAreaSelected}
+                loading={this.state.loading}
+                x1={this.props.x1}
+                y1={this.props.y1}
+                x2={this.props.x2}
+                y2={this.props.y2}
+              />
           </div>
         </div>
       </div>
