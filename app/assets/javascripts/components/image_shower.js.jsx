@@ -15,7 +15,7 @@ var ImageShower = React.createClass({
 
     return (
       <div className="image-holder">
-        <img ref="image" src={this.props.url} />
+        <img ref="image" src={this.props.url}  className="img-responsive"/>
         <div className="tag-area" style={tagAreaStyle}>
           {this.props.tag.tag}
         </div>

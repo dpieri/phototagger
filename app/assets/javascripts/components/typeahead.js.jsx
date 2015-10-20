@@ -14,13 +14,31 @@ var TypeAhead = React.createClass({
   componentDidMount: function() {
     var self = this;
     $(React.findDOMNode(this.refs.typeahead)).typeahead({
-      source: commonWords,
+      source: this.queryAutocomplete,
       items: 5,
+      minLength: 2,
       autoSelect: false,
       afterSelect: function(item) {
         self.props.onSubmit(item);
       }
     }).focus();
+  },
+
+  queryAutocomplete: function(query, process) {
+    $.ajax('/search_suggestions', {
+      data: {
+        term: query
+      }
+    })
+    .fail(this.onQueryAutocompleteFail)
+    .done(function(data, textStatus, jqXHR) {
+      console.log(data);
+      process(data);
+    });
+  },
+
+  onQueryAutocompleteFail: function(jqXHR, textStatus, errorThrown) {
+    // Fail silently for now
   },
 
   containerRight: function() {
