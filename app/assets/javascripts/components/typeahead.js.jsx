@@ -17,10 +17,34 @@ var TypeAhead = React.createClass({
       source: this.queryAutocomplete,
       items: 5,
       minLength: 2,
-      autoSelect: false,
       afterSelect: function(item) {
         self.props.onSubmit(item);
-      }
+      },
+      // Render function is copied from source, except one line is changed
+      render: function (items) {
+        var that = this;
+        var self = this;
+        var activeFound = false;
+        items = $(items).map(function (i, item) {
+          var text = self.displayText(item);
+          i = $(that.options.item).data('value', item);
+          i.find('a').html(that.highlighter(text));
+          if (text == self.$element.val()) {
+            i.addClass('active');
+            self.$element.data('active', item);
+            activeFound = true;
+          }
+          return i[0];
+        });
+
+        // CHANGED. Added the third conditional so that we only autoselect the first item if it is the only suggestion
+        if (this.autoSelect && !activeFound && items.length === 1) {
+          items.first().addClass('active');
+          this.$element.data('active', items.first().data('value'));
+        }
+        this.$menu.html(items);
+        return this;
+      },
     }).focus();
   },
 
@@ -32,7 +56,6 @@ var TypeAhead = React.createClass({
     })
     .fail(this.onQueryAutocompleteFail)
     .done(function(data, textStatus, jqXHR) {
-      console.log(data);
       process(data);
     });
   },
