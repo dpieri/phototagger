@@ -8,6 +8,9 @@ gem 'pg'
 # Web server
 gem 'unicorn'
 
+# Redis for autocomplete endpoint
+gem 'redis', '~> 3.0.7'
+
 # Auth
 gem 'devise'
 
