@@ -1,4 +1,7 @@
 var TypeAhead = React.createClass({
+
+  lastSearchTimestamp: 0,
+
   propTypes: {
     x1: React.PropTypes.number,
     y1: React.PropTypes.number,
@@ -49,6 +52,8 @@ var TypeAhead = React.createClass({
   },
 
   queryAutocomplete: function(query, process) {
+    var self = this;
+    var timestamp = Date.now();
     $.ajax('/search_suggestions', {
       data: {
         term: query
@@ -56,7 +61,10 @@ var TypeAhead = React.createClass({
     })
     .fail(this.onQueryAutocompleteFail)
     .done(function(data, textStatus, jqXHR) {
-      process(data);
+      if (timestamp >= self.lastSearchTimestamp) {
+        process(data);
+        this.lastSearchTimestamp = timestamp;
+      }
     });
   },
 
